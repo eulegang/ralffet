@@ -100,6 +100,17 @@ void parse_args(int argc, char **argv) {
       fprintf(stderr, "interp used without file\n");
       exit(1);
     }
+  } else if (!check_flags && optind < argc) {
+    char *buf = malloc(4096);
+    clean_flags |= CLEAN_CHECK;
+    char *shell = getenv("SHELL");
+    if (!shell)
+      shell = "bash";
+
+    strlcat(buf, shell, 4096);
+    strlcat(buf, " ", 4096);
+    strlcat(buf, argv[optind++], 4096);
+    check = buf;
   }
 
   if (optind < argc)
