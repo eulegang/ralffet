@@ -23,6 +23,7 @@ int main(int argc, char **argv) {
       break;
     }
 
+    trace("running \"%s\" ...\n", prompt);
     status = system(prompt);
 
     if (status)
