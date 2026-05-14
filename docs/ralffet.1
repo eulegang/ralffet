@@ -1,0 +1,54 @@
+.TH RALFFET "1" "March 2026" "eulegang" "User Commands"
+.SH NAME
+ralffet \- run prompt with retries
+.SH SYNOPSIS
+.B ralffet
+[\fI\,OPTION\/\fR]... [file]
+.SH DESCRIPTION
+.PP
+Run a \fBCHECK\fR command to check a specified state.
+If the state is undisirable run a \fBPROMPT\fR command to attempt to fix it.
+This \fBPROMPT\fR is most likely a non-interactive ai prompt.
+
+.TP
+\fB-p, --prompt PROMPT\fP
+
+The command to run to use a prompt
+
+.TP
+\fB-c, --check CHECK\fP
+
+The command to check if the prompt is necessary
+
+.TP
+\fB-r, --retries RETRIES\fP
+
+Only run up to \fBRETRIES\fR if \fBCHECK\fR keeps failing.
+
+.TP
+\fB-I, --interp INTERPRETER\fP
+
+If a file (last argument) is specified, use \fBINTERPRETER\fR to execute the file.
+
+The \fBINTERPRETER\fR defaults to \fB$SHELL\fR if not specified.
+
+The \fBINTERPRETER\fR defaults to bash if \fB$SHELL\fR not specified.
+
+.TP
+\fB-h, --help\fP
+
+Print a help menu.
+
+.TP
+\fB-v, --verbose\fP
+
+Trace the execution of \fBCHECK\fR, \fBPROMPT\fR and attempts.
+
+.SH AUTHOR
+eulegang
+
+.SH "REPORTING BUGS"
+https://github.com/eulegang/ralffet/issues
+
+.SH COPYRIGHT
+MIT License

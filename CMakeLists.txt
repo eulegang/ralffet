@@ -11,3 +11,5 @@ add_executable(
   src/args.c
 )
 
+install(TARGETS ralffet RUNTIME DESTINATION bin)
+install(FILES docs/ralffet.1 DESTINATION share/man/man1)
