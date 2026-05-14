@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     trace("attempt: %d\n", attempt);
 
     if (attempt) {
-      trace("ralphing again!");
+      trace("ralphing again!\n");
     }
 
     trace("running \"%s\" ...\n", check);
@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     status = system(prompt);
 
     if (status)
-      die("failed to prompt");
+      die("failed to prompt\n");
 
     attempt++;
   }
