@@ -1,22 +1,12 @@
 #pragma once
+#include "cmd.h"
 #include <stdbool.h>
 
-#define die(fmt, ...)                                                          \
-  do {                                                                         \
-    fprintf(stderr, fmt, ##__VA_ARGS__);                                       \
-    exit(1);                                                                   \
-  } while (0)
+typedef struct {
+  Command *check;
+  Command *prompt;
+  int retries;
+  bool verbose;
+} Args;
 
-#define trace(fmt, ...)                                                        \
-  do {                                                                         \
-    if (verbose)                                                               \
-      fprintf(stdout, fmt, ##__VA_ARGS__);                                     \
-  } while (0)
-
-extern char *prompt;
-extern char *check;
-extern int retries;
-extern bool verbose;
-
-void parse_args(int argc, char **argv);
-void clean_args();
+Args parse_args(int argc, char **argv);

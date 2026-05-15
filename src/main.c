@@ -1,30 +1,36 @@
 #include "args.h"
+#include "cmd.h"
+#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(int argc, char **argv) {
-  parse_args(argc, argv);
+  Args args = parse_args(argc, argv);
+  bool verbose = args.verbose;
+
+  trace("check: %s\n", command_show(args.check));
+  trace("prompt: %s\n", command_show(args.prompt));
 
   int attempt = 0;
   int status = 0;
 
-  while (attempt < retries) {
+  while (attempt < args.retries) {
     trace("attempt: %d\n", attempt);
 
     if (attempt) {
       trace("ralphing again!\n");
     }
 
-    trace("running \"%s\" ...\n", check);
-    status = system(check);
-    trace("\"%s\" resulted in %d\n", check, status);
+    trace("running \"%s\" ...\n", command_show(args.check));
+    status = command_run(args.check);
+    trace("\"%s\" resulted in %d\n", command_show(args.check), status);
 
     if (!status) {
       break;
     }
 
-    trace("running \"%s\" ...\n", prompt);
-    status = system(prompt);
+    trace("running \"%s\" ...\n", command_show(args.prompt));
+    status = command_run(args.prompt);
 
     if (status)
       die("failed to prompt\n");
@@ -32,5 +38,6 @@ int main(int argc, char **argv) {
     attempt++;
   }
 
-  clean_args();
+  if (attempt == args.retries)
+    exit(2);
 }

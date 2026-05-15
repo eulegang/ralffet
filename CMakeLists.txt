@@ -9,6 +9,8 @@ add_executable(
 
   src/main.c
   src/args.c
+  src/cmd.c
+  src/embedded.c
 )
 
 install(TARGETS ralffet RUNTIME DESTINATION bin)
